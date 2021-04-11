@@ -10,10 +10,7 @@ interface FieldProps {
 }
 
 const Field = ({arr} :  React.PropsWithChildren<FieldProps>): JSX.Element => {
-
   const maxValue = Math.max(...arr);
-
-  console.log(maxValue);
 
   const cells = arr.map((value, index) => <Cell key={index} height={(value / maxValue) * 100}/>);
 

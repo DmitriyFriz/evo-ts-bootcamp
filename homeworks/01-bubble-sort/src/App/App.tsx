@@ -11,11 +11,13 @@ import s from './App.module.scss';
 interface AppState {
   length: number;
   arr: number[];
-  status: SORT_STATUS
+  status: SORT_STATUS,
 }
 
 
 class App extends React.Component<{}, AppState> {
+  private intervalID?: ReturnType<typeof setInterval>;
+
   constructor(props: {}){
     super(props);
     this.state = {
@@ -25,28 +27,62 @@ class App extends React.Component<{}, AppState> {
     }
   }
 
-
   componentDidMount(): void {
     this.setState(({length}) => ({arr: getRandomArr(length)}));
   }
 
-  componentDidUpdate(): void {
-    console.log('update');
+  componentDidUpdate(prevProps: {}, prevState: AppState): void {
+    if (this.state.status !== prevState.status) {
+      switch(this.state.status) {
+        case SORT_STATUS.start:
+          this.removeInterval();
+          this.setState(({length}) => ({arr: getRandomArr(length)}));
+          break;
+        case SORT_STATUS.sorting:
+          this.intervalID = setInterval(() => console.log('...'), 100);
+          break;
+        case SORT_STATUS.pause:
+        case SORT_STATUS.finish:
+          this.removeInterval();
+          break;
+        default:
+          break;
+      }
+    }
+  }
+
+  componentWillUnmount(): void {
+    this.removeInterval();
+  }
+
+  private removeInterval(): void {
+    if (this.intervalID) {
+      clearInterval(this.intervalID)
+    }
   }
 
   private handleClickControl: React.MouseEventHandler<HTMLButtonElement> = () => {
-    console.log('control');
+    switch (this.state.status) {
+      case SORT_STATUS.start:
+        this.setState({status: SORT_STATUS.sorting});
+        break;
+      case SORT_STATUS.sorting:
+        this.setState({status: SORT_STATUS.pause});
+        break;
+      case SORT_STATUS.pause:
+        this.setState({status: SORT_STATUS.sorting});
+        break;
+      default:
+        break;
+    }
   }
 
   private handleClickReset: React.MouseEventHandler<HTMLButtonElement> = () => {
-    console.log('reset');
+    this.setState({status: SORT_STATUS.start});
   }
-
 
   render() {
     const { arr, status } = this.state;
-
-    console.log(arr);
 
     return (
       <div className={s.container}>
