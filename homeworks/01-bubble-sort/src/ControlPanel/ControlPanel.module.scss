@@ -5,11 +5,15 @@
   width: 100%;
 }
 
+.status {
+  margin-top: 10px;
+}
+
 .buttons_container {
   display: flex;
   justify-content: space-between;
 
-  max-width: 150px;
+  max-width: 200px;
   width: 100%;
   margin: 10px auto;
 }
@@ -21,9 +25,8 @@
 
   transition: 0.1s;
 
-  box-shadow: 0 0 7px #181c22;
   border-radius: 3px;
-  border: none;
+  border: 1px solid #218fbe;
   outline: none;
 
   background-color: #c1e7f7;
@@ -35,4 +38,15 @@
     opacity: 0.8;
     box-shadow: 0 0 3px #181c22;
   }
+}
+
+.input {
+  display: block;
+  width: 60px;
+  height: 25px;
+  margin: 5px auto;
+  border: 1px solid #218fbe;
+  border-radius: 3px;
+  outline: none;
+  text-align: center;
 }

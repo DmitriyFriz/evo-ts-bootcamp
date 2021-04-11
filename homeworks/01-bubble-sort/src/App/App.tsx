@@ -10,38 +10,37 @@ import bubbleSortStep from '../logic/bubbleSort';
 import s from './App.module.scss';
 
 interface AppState {
-  length: number;
+  inputValue: number;
   arr: number[];
-  status: SORT_STATUS,
+  status: SORT_STATUS;
 }
 
 
 class App extends React.Component<{}, AppState> {
   private intervalID?: ReturnType<typeof setInterval>;
+  private length: number;
 
   constructor(props: {}) {
     super(props);
+    this.length = 10;
     this.state = {
-      length: 20,
+      inputValue: this.length,
       arr: [],
       status: SORT_STATUS.start
     }
   }
 
   componentDidMount(): void {
-    this.setState(({ length }) => ({ arr: getRandomArr(length) }));
+    this.setState({ arr: getRandomArr(this.length) });
   }
 
   componentDidUpdate(prevProps: {}, prevState: AppState): void {
     if (this.state.status !== prevState.status) {
       switch (this.state.status) {
-        case SORT_STATUS.start:
-          this.removeInterval();
-          this.setState(({ length }) => ({ arr: getRandomArr(length) }));
-          break;
         case SORT_STATUS.sorting:
           this.intervalID = setInterval(this.getSortStep, 100);
           break;
+        case SORT_STATUS.start:
         case SORT_STATUS.pause:
         case SORT_STATUS.finish:
           this.removeInterval();
@@ -79,10 +78,31 @@ class App extends React.Component<{}, AppState> {
   }
 
   private handleClickReset: React.MouseEventHandler<HTMLButtonElement> = () => {
-    this.setState({ status: SORT_STATUS.start });
+    this.setState({ arr: getRandomArr(this.length), status: SORT_STATUS.start });
   }
 
-  private getSortStep = (): any => {
+  private handleClickManual: React.MouseEventHandler<HTMLButtonElement> = () => {
+    const { status } = this.state;
+
+    if ( status === SORT_STATUS.start || status === SORT_STATUS.pause ) {
+      this.getSortStep();
+    }
+  }
+
+  private handleChangeLength = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const min = +e.target.min;
+    const max = +e.target.max;
+    const value = parseInt(e.target.value);
+
+    if (value >= min && value <= max) {
+      this.length = value;
+      this.setState({ inputValue: value, arr: getRandomArr(this.length), status: SORT_STATUS.start });
+    } else {
+      this.setState({ inputValue: value });
+    }
+  }
+
+  private getSortStep = (): void => {
     /*
       Please, give me some recommendations. Should I use function form of setState below or use simple form setState?
       I used function form because newArr depended on previous arr state and function getSortStep is used in setInterval.
@@ -99,7 +119,7 @@ class App extends React.Component<{}, AppState> {
   }
 
   render() {
-    const { arr, status } = this.state;
+    const { arr, status, inputValue } = this.state;
 
     return (
       <div className={s.container}>
@@ -107,8 +127,11 @@ class App extends React.Component<{}, AppState> {
         <Field arr={arr} />
         <ControlPanel
           status={status}
+          inputValue={inputValue}
           onClickControl={this.handleClickControl}
           onClickReset={this.handleClickReset}
+          onChangeLength={this.handleChangeLength}
+          onClickManually={this.handleClickManual}
         />
       </div>
     );
