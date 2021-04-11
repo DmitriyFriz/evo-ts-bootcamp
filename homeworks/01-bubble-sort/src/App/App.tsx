@@ -4,6 +4,7 @@ import Field from '../Field';
 import ControlPanel from '../ControlPanel';
 import getRandomArr from '../logic/randomArr';
 import SORT_STATUS from '../logic/sortStatus';
+import bubbleSortStep from '../logic/bubbleSort';
 
 // style
 import s from './App.module.scss';
@@ -18,28 +19,28 @@ interface AppState {
 class App extends React.Component<{}, AppState> {
   private intervalID?: ReturnType<typeof setInterval>;
 
-  constructor(props: {}){
+  constructor(props: {}) {
     super(props);
     this.state = {
-      length: 30,
+      length: 20,
       arr: [],
       status: SORT_STATUS.start
     }
   }
 
   componentDidMount(): void {
-    this.setState(({length}) => ({arr: getRandomArr(length)}));
+    this.setState(({ length }) => ({ arr: getRandomArr(length) }));
   }
 
   componentDidUpdate(prevProps: {}, prevState: AppState): void {
     if (this.state.status !== prevState.status) {
-      switch(this.state.status) {
+      switch (this.state.status) {
         case SORT_STATUS.start:
           this.removeInterval();
-          this.setState(({length}) => ({arr: getRandomArr(length)}));
+          this.setState(({ length }) => ({ arr: getRandomArr(length) }));
           break;
         case SORT_STATUS.sorting:
-          this.intervalID = setInterval(() => console.log('...'), 100);
+          this.intervalID = setInterval(this.getSortStep, 100);
           break;
         case SORT_STATUS.pause:
         case SORT_STATUS.finish:
@@ -64,13 +65,13 @@ class App extends React.Component<{}, AppState> {
   private handleClickControl: React.MouseEventHandler<HTMLButtonElement> = () => {
     switch (this.state.status) {
       case SORT_STATUS.start:
-        this.setState({status: SORT_STATUS.sorting});
+        this.setState({ status: SORT_STATUS.sorting });
         break;
       case SORT_STATUS.sorting:
-        this.setState({status: SORT_STATUS.pause});
+        this.setState({ status: SORT_STATUS.pause });
         break;
       case SORT_STATUS.pause:
-        this.setState({status: SORT_STATUS.sorting});
+        this.setState({ status: SORT_STATUS.sorting });
         break;
       default:
         break;
@@ -78,7 +79,23 @@ class App extends React.Component<{}, AppState> {
   }
 
   private handleClickReset: React.MouseEventHandler<HTMLButtonElement> = () => {
-    this.setState({status: SORT_STATUS.start});
+    this.setState({ status: SORT_STATUS.start });
+  }
+
+  private getSortStep = (): any => {
+    /*
+      Please, give me some recommendations. Should I use function form of setState below or use simple form setState?
+      I used function form because newArr depended on previous arr state and function getSortStep is used in setInterval.
+     */
+    this.setState(({ arr, status }) => {
+      const copyArr = [...arr];
+      const { newArr, isSorted } = bubbleSortStep(copyArr);
+      if (isSorted) {
+        return { status: SORT_STATUS.finish, arr };
+      } else {
+        return { status, arr: newArr };
+      }
+    })
   }
 
   render() {
@@ -87,7 +104,7 @@ class App extends React.Component<{}, AppState> {
     return (
       <div className={s.container}>
         <h1>Bubble sort </h1>
-        <Field arr={arr}/>
+        <Field arr={arr} />
         <ControlPanel
           status={status}
           onClickControl={this.handleClickControl}
