@@ -1,19 +1,19 @@
 interface ITreeNode<T> {
   value: T;
-  left?: ITreeNode<T> | null;
-  right?: ITreeNode<T> | null;
+  left: ITreeNode<T> | null;
+  right: ITreeNode<T> | null;
 }
 
 enum TraverseType {
   inOrder,
   preOrder,
   postOrder,
-  breadth
+  breadth,
 }
 
 interface IBinaryTree<T> {
   setTree(value: ITreeNode<T>): this;
-  // traverse(traverseType): T[];
+  traverse(traverseType: TraverseType): T[];
   // getColumn(columnOrder: number): T[];
 }
 
@@ -26,20 +26,60 @@ class BinaryTree<T> implements IBinaryTree<T> {
     return this;
   }
 
-  traverse(currentTraverse: TraverseType) {
-    switch (currentTraverse) {
+  traverse(traverseType: TraverseType): T[] {
+    switch (traverseType) {
       case (TraverseType.inOrder):
-        return 0;
+        return this.traverseInOrder(this.tree);
       case (TraverseType.preOrder):
-        return 1;
+        return this.traversePreOrder(this.tree);
       case (TraverseType.postOrder):
-        return 2;
+        return this.traversePostOrder(this.tree);
       case (TraverseType.breadth):
-        return 3;
+        return [];
       default:
-        return assertNever(currentTraverse);
+        return assertNever(traverseType);
     }
   }
+
+  traverseInOrder(currentTree: ITreeNode<T> | null): T[] {
+    const traversedTree: T[] = [];
+
+    if (currentTree !== null) {
+      const { value, right, left } = currentTree;
+      const leftTraversedTree = this.traverseInOrder(left);
+      const rightTraversedTree = this.traverseInOrder(right);
+      traversedTree.push(...leftTraversedTree, value, ...rightTraversedTree)
+    }
+
+    return traversedTree;
+  }
+
+  traversePreOrder(currentTree: ITreeNode<T> | null): T[] {
+    const traversedTree: T[] = [];
+
+    if (currentTree !== null) {
+      const { value, right, left } = currentTree;
+      const leftTraversedTree = this.traversePreOrder(left);
+      const rightTraversedTree = this.traversePreOrder(right);
+      traversedTree.push(value, ...leftTraversedTree, ...rightTraversedTree)
+    }
+
+    return traversedTree;
+  }
+
+  traversePostOrder(currentTree: ITreeNode<T> | null): T[] {
+    const traversedTree: T[] = [];
+
+    if (currentTree !== null) {
+      const { value, right, left } = currentTree;
+      const leftTraversedTree = this.traversePostOrder(left);
+      const rightTraversedTree = this.traversePostOrder(right);
+      traversedTree.push(...leftTraversedTree, ...rightTraversedTree, value)
+    }
+
+    return traversedTree;
+  }
+
 }
 
 function assertNever(arg: never): never {
