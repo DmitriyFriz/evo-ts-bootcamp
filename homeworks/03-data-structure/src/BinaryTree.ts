@@ -26,7 +26,7 @@ class BinaryTree<T> implements IBinaryTree<T> {
     return this;
   }
 
-  traverse(traverseType: TraverseType): T[] {
+  public traverse(traverseType: TraverseType): T[] {
     switch (traverseType) {
       case (TraverseType.inOrder):
         return this.traverseInOrder(this.tree);
@@ -35,13 +35,13 @@ class BinaryTree<T> implements IBinaryTree<T> {
       case (TraverseType.postOrder):
         return this.traversePostOrder(this.tree);
       case (TraverseType.breadth):
-        return [];
+        return this.traverseBreadth();
       default:
         return assertNever(traverseType);
     }
   }
 
-  traverseInOrder(currentTree: ITreeNode<T> | null): T[] {
+  protected traverseInOrder(currentTree: ITreeNode<T> | null): T[] {
     const traversedTree: T[] = [];
 
     if (currentTree !== null) {
@@ -54,7 +54,7 @@ class BinaryTree<T> implements IBinaryTree<T> {
     return traversedTree;
   }
 
-  traversePreOrder(currentTree: ITreeNode<T> | null): T[] {
+  protected traversePreOrder(currentTree: ITreeNode<T> | null): T[] {
     const traversedTree: T[] = [];
 
     if (currentTree !== null) {
@@ -67,14 +67,36 @@ class BinaryTree<T> implements IBinaryTree<T> {
     return traversedTree;
   }
 
-  traversePostOrder(currentTree: ITreeNode<T> | null): T[] {
+  protected traversePostOrder(currentTree: ITreeNode<T> | null): T[] {
     const traversedTree: T[] = [];
 
-    if (currentTree !== null) {
+    if ( currentTree !== null ) {
       const { value, right, left } = currentTree;
       const leftTraversedTree = this.traversePostOrder(left);
       const rightTraversedTree = this.traversePostOrder(right);
       traversedTree.push(...leftTraversedTree, ...rightTraversedTree, value)
+    }
+
+    return traversedTree;
+  }
+
+  protected traverseBreadth(): T[] {
+    const traversedTree: T[] = [];
+    const queue: ITreeNode<T>[] = [];
+    queue.push(this.tree);
+
+    while ( queue.length > 0 ) {
+      const currentTree = queue.shift()!;
+
+      traversedTree.push(currentTree.value);
+
+      if ( currentTree.left !== null ) {
+        queue.push(currentTree.left);
+      }
+
+      if ( currentTree.right !== null ) {
+        queue.push(currentTree.right);
+      }
     }
 
     return traversedTree;
