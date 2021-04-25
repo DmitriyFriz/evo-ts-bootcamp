@@ -1,23 +1,25 @@
-interface ITreeNode<T> {
+import { assertNever } from '../helpers/tsUtility';
+
+export interface ITreeNode<T> {
   value: T;
   left: ITreeNode<T> | null;
   right: ITreeNode<T> | null;
 }
 
-enum TraverseType {
+export enum TraverseType {
   inOrder,
   preOrder,
   postOrder,
   breadth,
 }
 
-interface IBinaryTree<T> {
+export interface IBinaryTree<T> {
   setTree(value: ITreeNode<T>): this;
   traverse(traverseType: TraverseType): T[];
   getColumn(columnOrder: number): T[];
 }
 
-class BinaryTree<T> implements IBinaryTree<T> {
+export class BinaryTree<T> implements IBinaryTree<T> {
 
   constructor(private tree: ITreeNode<T>) { }
 
@@ -125,8 +127,4 @@ class BinaryTree<T> implements IBinaryTree<T> {
     )(0, this.tree);
   }
 
-}
-
-function assertNever(arg: never): never {
-  throw new Error(`Unexpected argument: ${arg}`);
 }
