@@ -14,7 +14,7 @@ enum TraverseType {
 interface IBinaryTree<T> {
   setTree(value: ITreeNode<T>): this;
   traverse(traverseType: TraverseType): T[];
-  // getColumn(columnOrder: number): T[];
+  getColumn(columnOrder: number): T[];
 }
 
 class BinaryTree<T> implements IBinaryTree<T> {
@@ -100,6 +100,29 @@ class BinaryTree<T> implements IBinaryTree<T> {
     }
 
     return traversedTree;
+  }
+
+  public getColumn(columnOrder: number): T[] {
+    return (
+      function getStep( currentOrder: number, currentTree: ITreeNode<T> | null ): T[] {
+        const orderedColumns: T[] = [];
+
+        if ( currentTree !== null ) {
+          const { value, right, left } = currentTree;
+
+          if ( columnOrder === currentOrder  ) {
+            orderedColumns.push(value);
+          }
+
+          const leftOrderedColumns = getStep(currentOrder - 1, left);
+          const rightOrderedColumns = getStep(currentOrder + 1, right);
+
+          orderedColumns.push(...leftOrderedColumns, ...rightOrderedColumns);
+        }
+
+        return orderedColumns;
+      }
+    )(0, this.tree);
   }
 
 }
