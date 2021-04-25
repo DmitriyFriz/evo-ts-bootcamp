@@ -2,7 +2,6 @@ import { TraverseType, BinaryTree } from './BinaryTree';
 import { firstNodeTree, secondNodeTree } from '../helpers/collectionTrees';
 
 describe('Binary Tree', () => {
-
   const binaryTree = new BinaryTree(firstNodeTree);
 
   describe('Traverse', () => {

@@ -21,7 +21,7 @@ export interface IBinaryTree<T> {
 
 export class BinaryTree<T> implements IBinaryTree<T> {
 
-  constructor(private tree: ITreeNode<T>) { }
+  constructor(protected tree: ITreeNode<T>) { }
 
   setTree(tree: ITreeNode<T>): this {
     this.tree = tree;
