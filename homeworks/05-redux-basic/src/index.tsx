@@ -1,8 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import App from './components/App';
+import reportWebVitals from './components/reportWebVitals';
+import store from './redux/store';
+import { TActions } from './redux/balance/types';
+
+const array: TActions[] = [
+  { type: "UPDATE_BALANCE", payload: 1000.0 },
+  { type: "CREDIT", payload: 200.0 },
+  { type: "CREDIT", payload: 100.0 },
+  { type: "SET_BALANCE_WITH_TAX", payload: 14.0 },
+  { type: "DEBIT", payload: 250.0 },
+  { type: "UPDATE_BALANCE", payload: 1000.0 },
+];
+
+array.forEach(action => store.dispatch(action));
 
 ReactDOM.render(
   <React.StrictMode>
