@@ -25,8 +25,7 @@ const pizza = {
   ]
 }
 
-
-export async function getPizza(): Promise<{items: Pizza[]}> {
+export async function getPizza(): Promise<{ items: Pizza[] }> {
   return new Promise((resolve) => {
     setTimeout(() => resolve(pizza), 1000);
   })
