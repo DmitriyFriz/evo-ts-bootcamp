@@ -6,5 +6,5 @@ export const pizzaLoaded = (pizza: Pizza[]) => ({
     payload: { pizza }
 } as const);
 
-export type pizzaActions = ReturnType<typeof pizzaLoaded>
+export type TPizzaActions = ReturnType<typeof pizzaLoaded>
 
