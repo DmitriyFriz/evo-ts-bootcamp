@@ -20,7 +20,7 @@ function App() {
   const basket = useSelector(getBasket);
   const isStuffedBasket = basket.length > 0;
 
-  const totalPrice = basket.reduce((sum, item) => sum + item.price, 0);
+  const totalPrice = basket.reduce((sum, item) => Math.round((sum + item.price) * 100) / 100, 0);
 
   useEffect(() => {
     dispatch(loadingPizza());

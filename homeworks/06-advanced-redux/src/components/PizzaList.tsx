@@ -7,7 +7,7 @@ interface PizzaListProps {
   pizza: Pizza[];
 }
 
-export function PizzaList({ pizza }: PizzaListProps) {
+export const PizzaList = React.memo(function ({ pizza }: PizzaListProps) {
   return (
     <>
       {R.map((p) =>
@@ -19,4 +19,4 @@ export function PizzaList({ pizza }: PizzaListProps) {
         />, pizza)}
     </>
   );
-}
+});

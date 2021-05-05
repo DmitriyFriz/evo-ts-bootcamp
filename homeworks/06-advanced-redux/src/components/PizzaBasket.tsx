@@ -7,7 +7,7 @@ interface PizzaBucketProps {
   basket: BasketItem[],
 }
 
-export function PizzaBasket({ basket }: PizzaBucketProps) {
+export const PizzaBasket = React.memo(function ({ basket }: PizzaBucketProps) {
   return (
     <>
       {R.map((b) =>
@@ -20,4 +20,4 @@ export function PizzaBasket({ basket }: PizzaBucketProps) {
         />, basket)}
     </>
   );
-}
+});
