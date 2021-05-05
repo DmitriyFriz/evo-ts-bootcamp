@@ -9,13 +9,15 @@ import {
   TotalPrice
 } from "./components";
 import { loadingPizza } from './redux/pizza/operations';
-import * as selectors from './redux/pizza/selectors';
+import { getPizza } from './redux/pizza/selectors';
+import { getBasket } from './redux/basket/selectors';
 
 
 function App() {
   const dispatch = useDispatch();
-  const pizza = useSelector(selectors.getPizza);
+  const pizza = useSelector(getPizza);
   const isLoadedPizza = pizza.length > 0;
+  const basket = useSelector(getBasket);
 
   useEffect(() => {
     dispatch(loadingPizza());
@@ -30,8 +32,8 @@ function App() {
       </div>
       <div className="col-span-1 bg-white overflow-y-auto h-full">
         <div className="flex flex-col p-8">
-          {/* <TotalPrice price={totalPrice} />
-                    {pizzaBucket(bucket)} */}
+          {/* <TotalPrice price={totalPrice} /> */}
+          <PizzaBasket basket={basket} />
           <div className="flex flex-col">
             <button
               className="bg-yellow-400 rounded-xl pt-2 pb-2"

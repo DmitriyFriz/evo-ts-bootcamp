@@ -1,9 +1,9 @@
 import { Reducer } from 'redux';
 import * as actionTypes from './actionTypes';
 import { TBasketActions } from './actions';
-import { Bascket } from '../../types';
+import { BasketItem } from '../../types';
 
-export const basketReducer: Reducer<Bascket[], TBasketActions> = (state = [], action) => {
+export const basketReducer: Reducer<BasketItem[], TBasketActions> = (state = [], action) => {
   switch (action.type) {
     case actionTypes.PIZZA_ADDED_INTO_BASKET:
       console.log(action.payload);
