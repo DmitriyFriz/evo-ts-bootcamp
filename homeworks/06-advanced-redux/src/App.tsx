@@ -18,6 +18,9 @@ function App() {
   const pizza = useSelector(getPizza);
   const isLoadedPizza = pizza.length > 0;
   const basket = useSelector(getBasket);
+  const isStuffedBasket = basket.length > 0;
+
+  const totalPrice = basket.reduce((sum, item) => sum + item.price, 0);
 
   useEffect(() => {
     dispatch(loadingPizza());
@@ -32,8 +35,8 @@ function App() {
       </div>
       <div className="col-span-1 bg-white overflow-y-auto h-full">
         <div className="flex flex-col p-8">
-          {/* <TotalPrice price={totalPrice} /> */}
-          <PizzaBasket basket={basket} />
+          <TotalPrice price={totalPrice} />
+          {isStuffedBasket ? <PizzaBasket basket={basket} /> : <Missing />}
           <div className="flex flex-col">
             <button
               className="bg-yellow-400 rounded-xl pt-2 pb-2"
