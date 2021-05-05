@@ -16,7 +16,6 @@ export function PizzaList({ pizza }: PizzaListProps) {
           _id={p._id}
           name={p.name}
           price={p.price}
-          onAdd={() => console.log(p._id)}
         />, pizza)}
     </>
   );

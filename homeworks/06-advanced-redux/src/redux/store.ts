@@ -1,6 +1,7 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { pizzaReducer } from './pizza/reducer';
+import { basketReducer } from './basket/reducer';
 
 declare global {
   interface Window {
@@ -11,7 +12,8 @@ declare global {
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-  pizza: pizzaReducer
+  pizza: pizzaReducer,
+  basket: basketReducer
 });
 
 export type TStore = ReturnType<typeof rootReducer>

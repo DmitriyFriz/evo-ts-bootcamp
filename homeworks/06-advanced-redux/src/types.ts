@@ -1,10 +1,12 @@
 export type Pizza = {
-    name: string;
-    price: number;
-    _id: string;
+  name: string;
+  price: number;
+  _id: string;
 }
 
+export type Bascket = Pizza & { count: number }
+
 export type State = {
-    pizza: Pizza[];
-    basket: Array<Pizza & { count: number;}>;
+  pizza: Pizza[];
+  basket: Bascket[];
 }

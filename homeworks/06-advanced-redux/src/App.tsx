@@ -8,7 +8,7 @@ import {
   PizzaBasket,
   TotalPrice
 } from "./components";
-import * as operations from './redux/pizza/operations';
+import { loadingPizza } from './redux/pizza/operations';
 import * as selectors from './redux/pizza/selectors';
 
 
@@ -18,7 +18,7 @@ function App() {
   const isLoadedPizza = pizza.length > 0;
 
   useEffect(() => {
-    dispatch(operations.loadingPizza());
+    dispatch(loadingPizza());
   }, [dispatch]);
 
   return (

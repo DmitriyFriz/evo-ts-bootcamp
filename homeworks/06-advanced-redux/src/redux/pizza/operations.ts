@@ -4,12 +4,12 @@ import { TPizzaActions } from './actions';
 import { TStore } from '../store';
 import { getPizza } from '../../services/api';
 
-type TThunk = ThunkAction<void, TStore, unknown, TPizzaActions>
+type TPizzaThunk = ThunkAction<void, TStore, unknown, TPizzaActions>
 
-export const loadingPizza = (): TThunk => async (dispatch) => {
+export const loadingPizza = (): TPizzaThunk => async (dispatch) => {
   try {
     const { items: pizza } = await getPizza();
-    dispatch(actions.pizzaLoaded(pizza));
+    dispatch(actions.pizzaViewed(pizza));
   } catch(error) {
     alert(error.message);
   }
