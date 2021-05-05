@@ -13,5 +13,5 @@ export const addToBasket = (id: string): TBasketThunk => async (dispatch, getSta
 
 export const removeFromBasket = (id: string): TBasketThunk => async (dispatch, getState) => {
   const pizza = getPizza(getState());
-  dispatch(actions.pizzaAddedIntoBasket(id, pizza));
+  dispatch(actions.pizzaRemovedFromBasket(id, pizza));
 }

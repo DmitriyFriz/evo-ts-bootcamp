@@ -13,7 +13,6 @@ export function PizzaBasket({ basket }: PizzaBucketProps) {
       {R.map((b) =>
         <PizzaBasketItem
           _id={b._id}
-          onMinus={() => {}}
           key={b._id}
           price={b.price}
           name={b.name}
