@@ -1,5 +1,5 @@
 import * as actionType from './actionTypes';
-import { Pizza } from '../../types';
+import { Pizza } from '../../../types';
 
 export const pizzaAddedIntoBasket = (id: string, pizza: Pizza[]) => ({
   type: actionType.PIZZA_ADDED_INTO_BASKET,

@@ -1,8 +1,8 @@
 import { ThunkAction } from 'redux-thunk';
 import * as actions from './actions';
 import { TPizzaActions } from './actions';
-import { TStore } from '../store';
-import { getPizza } from '../../services/api';
+import { TStore } from '../index';
+import { getPizza } from '../../../services/api';
 
 type TPizzaThunk = ThunkAction<void, TStore, unknown, TPizzaActions>
 

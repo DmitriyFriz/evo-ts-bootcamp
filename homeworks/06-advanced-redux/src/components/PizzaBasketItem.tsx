@@ -5,7 +5,7 @@ import { PizzaName } from "./PizzaName";
 import { PizzaDescription } from "./PizzaDescription";
 import { PizzaPrice } from "./PizzaPrice";
 import { useDispatch } from 'react-redux';
-import { removeFromBasket } from '../redux/basket/operations';
+import { removeFromBasket } from '../redux/ducks/basket/operations';
 
 interface PizzaProps {
   price: number;

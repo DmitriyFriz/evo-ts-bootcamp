@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
 import * as actionTypes from './actionTypes';
 import { TPizzaActions } from './actions';
-import { Pizza } from '../../types';
+import { Pizza } from '../../../types';
 
 export const pizzaReducer: Reducer<Pizza[], TPizzaActions> = (state = [], action) => {
   switch (action.type) {

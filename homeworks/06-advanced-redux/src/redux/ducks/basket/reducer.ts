@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
 import * as actionTypes from './actionTypes';
 import { TBasketActions } from './actions';
-import { BasketItem } from '../../types';
+import { BasketItem } from '../../../types';
 import { updateBasket} from './utils';
 
 export const basketReducer: Reducer<BasketItem[], TBasketActions> = (state = [], action) => {

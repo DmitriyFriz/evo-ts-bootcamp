@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import {
@@ -8,9 +8,9 @@ import {
   PizzaBasket,
   TotalPrice
 } from "./components";
-import { loadingPizza } from './redux/pizza/operations';
-import { getPizza } from './redux/pizza/selectors';
-import { getBasket } from './redux/basket/selectors';
+import { loadingPizza } from './redux/ducks/pizza/operations';
+import { getPizza } from './redux/ducks/pizza/selectors';
+import { getBasket } from './redux/ducks/basket/selectors';
 
 
 function App() {

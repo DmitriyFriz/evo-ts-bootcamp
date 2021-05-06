@@ -3,7 +3,7 @@ import { PizzaName } from "./PizzaName";
 import { PizzaPrice } from "./PizzaPrice";
 import { Circle } from "./Circle";
 import { useDispatch } from 'react-redux';
-import { addToBasket } from '../redux/basket/operations';
+import { addToBasket } from '../redux/ducks/basket/operations';
 
 interface PizzaItemProps {
   _id: string,

@@ -1,7 +1,7 @@
 import { ThunkAction } from 'redux-thunk';
 import * as actions from './actions';
 import { TBasketActions } from './actions';
-import { TStore } from '../store';
+import { TStore } from '../index';
 import { getPizza } from '../pizza/selectors';
 
 type TBasketThunk = ThunkAction<void, TStore, unknown, TBasketActions>

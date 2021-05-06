@@ -1,4 +1,4 @@
-import { BasketItem, Pizza } from '../../types';
+import { BasketItem, Pizza } from '../../../types';
 
 interface GetPizzaAndBasketItem {
   (id: string, basket: BasketItem[], pizza: Pizza[]): PairPizzaBasketItem;
