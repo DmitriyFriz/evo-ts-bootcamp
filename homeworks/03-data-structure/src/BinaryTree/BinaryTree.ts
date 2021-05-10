@@ -7,10 +7,10 @@ export interface ITreeNode<T> {
 }
 
 export enum TraverseType {
-  inOrder,
-  preOrder,
-  postOrder,
-  breadth,
+  InOrder,
+  PreOrder,
+  PostOrder,
+  Breadth,
 }
 
 export interface IBinaryTree<T> {
@@ -30,13 +30,13 @@ export class BinaryTree<T> implements IBinaryTree<T> {
 
   public traverse(traverseType: TraverseType): T[] {
     switch (traverseType) {
-      case (TraverseType.inOrder):
+      case (TraverseType.InOrder):
         return this.traverseInOrder(this.tree);
-      case (TraverseType.preOrder):
+      case (TraverseType.PreOrder):
         return this.traversePreOrder(this.tree);
-      case (TraverseType.postOrder):
+      case (TraverseType.PostOrder):
         return this.traversePostOrder(this.tree);
-      case (TraverseType.breadth):
+      case (TraverseType.Breadth):
         return this.traverseBreadth();
       default:
         return assertNever(traverseType);

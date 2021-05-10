@@ -5,7 +5,7 @@ interface IBinarySearchTree extends IBinaryTree<number> {
 }
 
 export class BinarySearchTree extends BinaryTree<number> implements IBinarySearchTree {
-  has(value: number): boolean {
+  public has(value: number): boolean {
     let currentTree: ITreeNode<number> | null = this.tree;
     while (currentTree.value !== value) {
 
