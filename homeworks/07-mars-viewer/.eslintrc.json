@@ -3,11 +3,7 @@
     "browser": true,
     "es2021": true
   },
-  "plugins": [
-    "react",
-    "@typescript-eslint",
-    "prettier"
-  ],
+  "plugins": ["react", "@typescript-eslint", "prettier"],
   "extends": [
     "eslint:recommended",
     "airbnb",
@@ -27,10 +23,7 @@
     }
   },
   "rules": {
-    "object-curly-spacing": [
-      "warn",
-      "always"
-    ],
+    "object-curly-spacing": ["warn", "always"],
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -44,10 +37,7 @@
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [
-          ".tsx",
-          ".jsx"
-        ]
+        "extensions": [".tsx", ".jsx"]
       }
     ],
     "max-len": [
@@ -73,6 +63,9 @@
     "react/no-unescaped-entities": "off",
     "react/jsx-one-expression-per-line": "off",
     "react/jsx-wrap-multilines": "off",
-    "react/destructuring-assignment": "off"
+    "react/destructuring-assignment": "off",
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["error"],
+    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state", "draft", "draftState"] }]
   }
 }

@@ -1,8 +1,7 @@
-import { Photo } from '../types';
+import { Photo, RoverName } from '../types';
 
 const apiKey = 'hhBxTg2buuk5Fw4ysiY2Esz2nC12syXcbscxECMh';
 const marsRoverURL = 'https://api.nasa.gov/mars-photos/api/v1/rovers/';
-const roverName = 'perseverance';
 
 interface Camera {
   // eslint-disable-next-line
@@ -21,14 +20,15 @@ interface PhotoAPI {
   rover: Rover;
 }
 
-export async function getMarsRoverPhotos(sol: number): Promise<Photo[]> {
-  const url = `${marsRoverURL}/${roverName}/photos?sol=${sol}&api_key=${apiKey}`;
+export async function getMarsRoverPhotos(sol: number, rover: RoverName): Promise<Photo[]> {
+  const url = `${marsRoverURL}/${rover}/photos?sol=${sol}&api_key=${apiKey}`;
 
   const response = await fetch(url);
   const json = await response.json();
 
   if (response.status !== 200) {
-    throw new Error(json.error.message);
+    const error: string = json.errors || json.error.message;
+    throw new Error(error);
   }
 
   const photosAPI: PhotoAPI[] = json.photos;
