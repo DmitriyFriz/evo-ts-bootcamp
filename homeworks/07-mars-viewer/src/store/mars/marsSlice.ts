@@ -37,10 +37,10 @@ export const marsSlice = createSlice({
   name: 'mars',
   initialState,
   reducers: {
-    selectSol(state, action: PayloadAction<number>) {
+    changeSol(state, action: PayloadAction<number>) {
       state.selectedSol = action.payload;
     },
-    selectRover(state, action: PayloadAction<RoverName>) {
+    changeRover(state, action: PayloadAction<RoverName>) {
       state.selectedRover = action.payload;
     },
   },
@@ -73,3 +73,4 @@ export const marsSlice = createSlice({
 });
 
 export const marsReducer = marsSlice.reducer;
+export const { changeRover, changeSol } = marsSlice.actions;

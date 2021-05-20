@@ -1,15 +1,19 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../hooks';
 import { fetchSol } from '../../store/mars/marsSlice';
 import { RoverName } from '../../types';
+import { ControlPanel } from '../ControlPanel';
+
+// style
+import s from './App.module.scss';
 
 export const App = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  console.log(useSelector((s) => s));
   return (
-    <div>
-      <h1>Hello world</h1>
+    <div className={s.container}>
+      <ControlPanel />
+
       <button
         type="button"
         onClick={() => {
