@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { stat } from 'fs';
 import { LoadingStatus, RoverName, Sols, Photo } from '../../types';
 import { getMarsRoverPhotos } from '../../services/marsRover';
 
@@ -20,18 +21,17 @@ const initialState: MarsState = {
   rovers: {},
 } as MarsState;
 
-export const fetchSol = createAsyncThunk<
-  Photo[],
-  { sol: number; rover: RoverName },
-  { rejectValue: string }
->('mars/fetchSol', async ({ sol, rover }, { rejectWithValue }) => {
-  try {
-    const photos = await getMarsRoverPhotos(sol, rover);
-    return photos;
-  } catch (err) {
-    return rejectWithValue(err);
+export const fetchSol = createAsyncThunk<Photo[], { sol: number; rover: RoverName }>(
+  'mars/fetchSol',
+  async ({ sol, rover }, { rejectWithValue }) => {
+    try {
+      const photos = await getMarsRoverPhotos(sol, rover);
+      return photos;
+    } catch (err) {
+      throw new Error(err);
+    }
   }
-});
+);
 
 export const marsSlice = createSlice({
   name: 'mars',
@@ -51,13 +51,23 @@ export const marsSlice = createSlice({
       state.error = null;
     });
     builder.addCase(fetchSol.fulfilled, (state, action) => {
-      const a = action.meta.arg;
-      console.log(a);
       state.loading = LoadingStatus.Idle;
+      const { sol, rover } = action.meta.arg;
+      const photos = action.payload;
+
+      const currentRover = state.rovers[rover];
+      if (currentRover === undefined) {
+        state.rovers[rover] = {
+          [sol]: photos,
+        };
+      } else {
+        currentRover[sol] = photos;
+      }
     });
     builder.addCase(fetchSol.rejected, (state, action) => {
-      const a = action;
-      console.log(a);
+      state.loading = LoadingStatus.Idle;
+      const { message } = action.error;
+      state.error = message || 'unknown error';
     });
   },
 });

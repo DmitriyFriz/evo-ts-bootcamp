@@ -18,5 +18,5 @@ export enum RoverName {
   Perseverance = 'perseverance',
   Curiosity = 'curiosity',
   Opportunity = 'opportunity',
-  Spirit = 'Spirit',
+  spirit = 'spirit',
 }
