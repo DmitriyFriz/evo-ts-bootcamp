@@ -16,7 +16,7 @@ export const PhotoItem = ({ photo }: PhotoItemProps) => {
       <img className={s.photo} src={imgSrc} alt={cameraName} />
       <Like id={id} />
       <span className={s.title}>
-        {roverName}, {cameraName}
+        Rover: {roverName}, Camera: {cameraName}
       </span>
     </div>
   );
