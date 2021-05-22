@@ -5,13 +5,12 @@ import { fetchSol } from '../../store/mars/marsSlice';
 
 export const SolLoading = () => {
   const dispatch = useAppDispatch();
-  const selectedSol = useAppSelector(selectSelectedSol);
-  const selectedRover = useAppSelector(selectSelectedRover);
+
   return (
     <button
       type="button"
       onClick={() => {
-        dispatch(fetchSol({ sol: selectedSol, rover: selectedRover }));
+        dispatch(fetchSol());
       }}
     >
       load

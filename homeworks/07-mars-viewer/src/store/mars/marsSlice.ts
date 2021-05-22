@@ -2,7 +2,7 @@ import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { LoadingStatus, RoverName, Sols, Photo } from '../../types';
 import { getMarsRoverPhotos } from '../../services/marsRover';
 import { RootState } from '../store';
-import { selectPhotos } from './selectors';
+import { selectPhotos, selectSelectedRover, selectSelectedSol } from './selectors';
 
 interface MarsState {
   loading: LoadingStatus;
@@ -22,19 +22,20 @@ const initialState: MarsState = {
   rovers: {},
 } as MarsState;
 
-export const fetchSol = createAsyncThunk<Photo[], { sol: number; rover: RoverName }>(
+export const fetchSol = createAsyncThunk<{ sol: number; rover: RoverName; photos: Photo[] }>(
   'mars/fetchSol',
-  async ({ sol, rover }, { getState }) => {
+  async (_, { getState }) => {
     try {
+      const sol = selectSelectedSol(getState() as RootState);
+      const rover = selectSelectedRover(getState() as RootState);
       const photos = await getMarsRoverPhotos(sol, rover);
-      return photos;
+      return { sol, rover, photos };
     } catch (err) {
       throw new Error(err);
     }
   },
   {
-    condition: ({ sol, rover }, { getState }) => {
-      console.log(getState());
+    condition: (_, { getState }) => {
       const photos = selectPhotos(getState() as RootState);
 
       if (photos !== undefined) {
@@ -64,8 +65,7 @@ export const marsSlice = createSlice({
     });
     builder.addCase(fetchSol.fulfilled, (state, action) => {
       state.loading = LoadingStatus.Idle;
-      const { sol, rover } = action.meta.arg;
-      const photos = action.payload;
+      const { sol, rover, photos } = action.payload;
 
       const currentRover = state.rovers[rover];
       if (currentRover === undefined) {
