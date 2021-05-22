@@ -13,15 +13,6 @@ export const App = () => {
   return (
     <div className={s.container}>
       <ControlPanel />
-
-      <button
-        type="button"
-        onClick={() => {
-          dispatch(fetchSol({ sol: 1, rover: RoverName.Perseverance }));
-        }}
-      >
-        load
-      </button>
     </div>
   );
 };

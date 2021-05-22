@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { stat } from 'fs';
 import { LoadingStatus, RoverName, Sols, Photo } from '../../types';
 import { getMarsRoverPhotos } from '../../services/marsRover';
+import { RootState } from '../store';
+import { selectPhotos } from './selectors';
 
 interface MarsState {
   loading: LoadingStatus;
@@ -23,13 +24,24 @@ const initialState: MarsState = {
 
 export const fetchSol = createAsyncThunk<Photo[], { sol: number; rover: RoverName }>(
   'mars/fetchSol',
-  async ({ sol, rover }, { rejectWithValue }) => {
+  async ({ sol, rover }, { getState }) => {
     try {
       const photos = await getMarsRoverPhotos(sol, rover);
       return photos;
     } catch (err) {
       throw new Error(err);
     }
+  },
+  {
+    condition: ({ sol, rover }, { getState }) => {
+      console.log(getState());
+      const photos = selectPhotos(getState() as RootState);
+
+      if (photos !== undefined) {
+        return false;
+      }
+      return true;
+    },
   }
 );
 
