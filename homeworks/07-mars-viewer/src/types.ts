@@ -1,7 +1,7 @@
 export interface Photo {
   id: number;
   imgSrc: string;
-  roverName: string;
+  roverName: RoverName;
   cameraName: string;
 }
 

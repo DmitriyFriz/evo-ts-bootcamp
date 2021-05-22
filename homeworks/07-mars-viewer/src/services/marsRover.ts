@@ -9,7 +9,7 @@ interface Camera {
 }
 
 interface Rover {
-  name: string;
+  name: RoverName;
 }
 
 interface PhotoAPI {

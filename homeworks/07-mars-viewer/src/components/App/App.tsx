@@ -7,8 +7,6 @@ import { Gallery } from '../Gallery';
 import s from './App.module.scss';
 
 export const App = () => {
-  const dispatch = useAppDispatch();
-
   return (
     <div className={s.container}>
       <ControlPanel />
