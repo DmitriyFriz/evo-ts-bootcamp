@@ -6,16 +6,15 @@
   transition: 0.1s;
 
   border-radius: 3px;
-  border: 1px solid #ebee27;
+  border: 1px solid #2d303a;
   outline: none;
 
-  background-color: #eedb71;
+  background-color: #e2ddcd;
   cursor: pointer;
 
   text-transform: capitalize;
 
   &:hover {
-    opacity: 0.8;
     box-shadow: 0 0 3px #181c22;
   }
 }

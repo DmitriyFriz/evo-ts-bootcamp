@@ -3,7 +3,7 @@
 }
 
 .route_button {
-  font-size: 16px;
+  font-size: 18px;
   color: inherit;
   background: inherit;
   outline: none;
@@ -14,6 +14,7 @@
   &:disabled {
     opacity: 0.5;
     cursor: default;
+    border-bottom: 2px dashed #2d303a;
   }
 }
 

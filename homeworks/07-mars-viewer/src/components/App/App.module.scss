@@ -23,8 +23,12 @@ body {
 
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
-  color: #1e2125;
+  color: #2d303a;
   font-size: 16px;
+
+  background: url('../../assets/img/background.jpg') 50% fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .container {
