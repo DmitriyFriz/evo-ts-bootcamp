@@ -12,7 +12,7 @@ export const Router = () => {
   const route = useAppSelector(selectRoute);
 
   return (
-    <div>
+    <div className={s.container}>
       <button
         className={s.route_button}
         onClick={() => dispatch(changeRoute(RouteName.Photos))}
