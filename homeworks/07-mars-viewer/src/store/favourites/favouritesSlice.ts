@@ -5,7 +5,7 @@ type Favourite = { id: number; sol: number; rover: RoverName };
 
 const initialState: Favourite[] = [];
 
-export const favouritesSlice = createSlice({
+const favouritesSlice = createSlice({
   name: 'favourites',
   initialState,
   reducers: {

@@ -1,8 +1,19 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import { selectSelectedRover, selectSelectedSol } from '../mars/selectors';
+import { selectSelectedRover, selectSelectedSol, selectAllPhotos } from '../mars/selectors';
+import { Photo } from '../../types';
 
 export const selectFavourites = (state: RootState) => state.favourites;
+
+export const selectFavouritesPhotos = createSelector(
+  selectFavourites,
+  selectAllPhotos,
+  (favourites, allPhotos) => {
+    return favourites.map(
+      ({ id, rover, sol }) => allPhotos[rover]![sol].find((photo) => photo.id === id) as Photo
+    );
+  }
+);
 
 export const selectFavouritesIdByRoverSol = createSelector(
   selectSelectedSol,

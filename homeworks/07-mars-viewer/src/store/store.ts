@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { marsReducer } from './mars/marsSlice';
 import { favouritesReducer } from './favourites/favouritesSlice';
+import { routeReducer } from './route/routeSlice';
 
 export const store = configureStore({
   reducer: {
     mars: marsReducer,
     favourites: favouritesReducer,
+    route: routeReducer,
   },
 });
 

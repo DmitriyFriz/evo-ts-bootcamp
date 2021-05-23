@@ -46,7 +46,7 @@ export const fetchSol = createAsyncThunk<{ sol: number; rover: RoverName; photos
   }
 );
 
-export const marsSlice = createSlice({
+const marsSlice = createSlice({
   name: 'mars',
   initialState,
   reducers: {

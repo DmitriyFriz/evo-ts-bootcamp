@@ -1,0 +1,19 @@
+.route_button {
+  font-size: 16px;
+  color: inherit;
+  background: inherit;
+  outline: none;
+  border: none;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.route_button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.separator {
+  margin-left: 5px;
+  margin-right: 5px;
+}
