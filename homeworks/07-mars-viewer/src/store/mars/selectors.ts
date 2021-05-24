@@ -1,5 +1,4 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { stat } from 'fs';
 import { RootState } from '../store';
 
 export const selectSelectedRover = (state: RootState) => state.mars.selectedRover;
@@ -7,6 +6,10 @@ export const selectSelectedRover = (state: RootState) => state.mars.selectedRove
 export const selectSelectedSol = (state: RootState) => state.mars.selectedSol;
 
 export const selectRovers = (state: RootState) => state.mars.rovers;
+
+export const selectLoadingStatus = (state: RootState) => state.mars.loading;
+
+export const selectError = (state: RootState) => state.mars.error;
 
 export const selectPhotos = createSelector(
   selectSelectedSol,

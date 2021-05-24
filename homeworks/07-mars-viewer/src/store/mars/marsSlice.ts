@@ -24,11 +24,11 @@ const initialState: MarsState = {
 
 export const fetchSol = createAsyncThunk<{ sol: number; rover: RoverName; photos: Photo[] }>(
   'mars/fetchSol',
-  async (_, { getState }) => {
+  async (_, { getState, signal }) => {
     try {
       const sol = selectSelectedSol(getState() as RootState);
       const rover = selectSelectedRover(getState() as RootState);
-      const photos = await getMarsRoverPhotos(sol, rover);
+      const photos = await getMarsRoverPhotos(sol, rover, signal);
       return { sol, rover, photos };
     } catch (err) {
       throw new Error(err);
@@ -60,7 +60,7 @@ const marsSlice = createSlice({
 
   extraReducers: (builder) => {
     builder.addCase(fetchSol.pending, (state) => {
-      state.loading = LoadingStatus.Idle;
+      state.loading = LoadingStatus.Pending;
       state.error = null;
     });
     builder.addCase(fetchSol.fulfilled, (state, action) => {
@@ -79,7 +79,10 @@ const marsSlice = createSlice({
     builder.addCase(fetchSol.rejected, (state, action) => {
       state.loading = LoadingStatus.Idle;
       const { message } = action.error;
-      state.error = message || 'unknown error';
+      const { aborted } = action.meta;
+      if (!aborted) {
+        state.error = message || 'unknown error';
+      }
     });
   },
 });

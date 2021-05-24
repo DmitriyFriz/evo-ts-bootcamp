@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Router } from '../../components/Router';
 import { RouteName } from '../../types';
 
 const initialState: RouteName = RouteName.Photos as RouteName;

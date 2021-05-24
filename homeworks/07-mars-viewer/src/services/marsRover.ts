@@ -20,10 +20,14 @@ interface PhotoAPI {
   rover: Rover;
 }
 
-export async function getMarsRoverPhotos(sol: number, rover: RoverName): Promise<Photo[]> {
+export async function getMarsRoverPhotos(
+  sol: number,
+  rover: RoverName,
+  signal: AbortSignal
+): Promise<Photo[]> {
   const url = `${marsRoverURL}/${rover}/photos?sol=${sol}&api_key=${apiKey}`;
 
-  const response = await fetch(url);
+  const response = await fetch(url, { signal });
   const json = await response.json();
 
   if (response.status !== 200) {
