@@ -28,24 +28,49 @@ body {
 }
 
 .container {
-  width: 700px;
-  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-  margin: 30px auto;
+.board {
+  margin-top: 10px;
   position: relative;
+  width: 600px;
+  height: 600px;
 
-  background-image: url("../src/assets/img/brick-wall.svg");
-  background-repeat: repeat;
-  background-size: 100px;
-  background-color: wheat;
+  background: url("../src/assets/img/cheese.svg") 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  cursor: url("../src/assets/img/hand.png"), grab;
 }
 
 .cell {
-  width: 60px;
-  height: 90px;
-  background-color: #0ff3f3;
+  width: 70px;
+  height: 70px;
+  background-color: #f7be56;
   position: absolute;
-  left: 10px;
-  top: 10px;
-  border: 5px solid #2d303a;
+  top: 70px;
+  left: 70px;
+  border: 4px solid #323c6b;
+  border-radius: 50%;
+}
+
+.aim {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+
+  top: 70px;
+  left: 70px;
+
+  background-image: url("../src/assets/img/mouse.svg");
+  background-repeat: no-repeat;
+  background-size: 50px;
+  background-position: center;
+  border-radius: 50%;
+
+  z-index: 10;
 }
