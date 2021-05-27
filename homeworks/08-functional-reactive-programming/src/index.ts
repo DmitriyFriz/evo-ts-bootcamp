@@ -1,1 +1,4 @@
-import "./index.css";
+import './index.css';
+import { renderLayout } from './rendedr';
+
+renderLayout();
