@@ -5,6 +5,8 @@ interface CellPosition {
 
 export const aimDomNode = document.getElementById('aim')!;
 const boarDomNode = document.getElementById('board')!;
+const runDomNode = document.getElementById('run')!;
+const catchDomNode = document.getElementById('catch')!;
 
 const cellPositions: CellPosition[] = [
   { top: 70, left: 70 },
@@ -36,4 +38,12 @@ export const randomRenderAim = () => {
   const { top, left } = cellPositions[randomCellPosition];
   aimDomNode.style.top = `${top}px`;
   aimDomNode.style.left = `${left}px`;
+};
+
+export const updateRunScore = (score: number) => {
+  runDomNode.textContent = `${score}`;
+};
+
+export const updateCatchScore = (score: number) => {
+  catchDomNode.textContent = `${score}`;
 };
