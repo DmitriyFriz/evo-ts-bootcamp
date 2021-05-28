@@ -1,12 +1,12 @@
-interface Cell {
+interface CellPosition {
   top: number;
   left: number;
 }
 
+export const aimDomNode = document.getElementById('aim')!;
 const boarDomNode = document.getElementById('board')!;
-const aimDomNode = document.getElementById('aim')!;
 
-const positions: Cell[] = [
+const cellPositions: CellPosition[] = [
   { top: 70, left: 70 },
   { top: 140, left: 155 },
   { top: 425, left: 145 },
@@ -18,7 +18,7 @@ const positions: Cell[] = [
   { top: 440, left: 270 },
 ];
 
-const createCell = ({ top, left }: Cell): HTMLDivElement => {
+const createCell = ({ top, left }: CellPosition): HTMLDivElement => {
   const cell = document.createElement('div');
   cell.className = 'cell';
   cell.style.top = `${top}px`;
@@ -27,6 +27,13 @@ const createCell = ({ top, left }: Cell): HTMLDivElement => {
 };
 
 export const renderLayout = () => {
-  const layout = positions.map((position) => createCell(position));
+  const layout = cellPositions.map((position) => createCell(position));
   boarDomNode.append(...layout);
+};
+
+export const randomRenderAim = () => {
+  const randomCellPosition = Math.round(Math.random() * (cellPositions.length - 1));
+  const { top, left } = cellPositions[randomCellPosition];
+  aimDomNode.style.top = `${top}px`;
+  aimDomNode.style.left = `${left}px`;
 };

@@ -35,10 +35,10 @@ body {
 }
 
 .board {
-  margin-top: 10px;
   position: relative;
   width: 600px;
   height: 600px;
+  margin-top: 10px;
 
   background: url('../src/assets/img/cheese.svg') 50%;
   background-repeat: no-repeat;
@@ -62,15 +62,11 @@ body {
   position: absolute;
   width: 70px;
   height: 70px;
-
-  top: 70px;
-  left: 70px;
+  z-index: 10;
 
   background-image: url('../src/assets/img/mouse.svg');
   background-repeat: no-repeat;
   background-size: 50px;
   background-position: center;
   border-radius: 50%;
-
-  z-index: 10;
 }
