@@ -13,7 +13,7 @@ import './index.css';
 
 renderLayout();
 
-const interval$ = timer(0, 800).pipe(tap(randomRenderAim), mapTo(true));
+const interval$ = timer(0, 900).pipe(tap(randomRenderAim), mapTo(true));
 
 const clickOnAim$ = fromEvent(aimDomNode, 'click').pipe(
   scan((catchAcc) => catchAcc + 1, 0),
