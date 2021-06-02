@@ -1,11 +1,9 @@
 import EventEmitter from 'events';
-import { DirWatcher, changeEvent } from './dirWatcher';
+import { DirWatcher } from './dirWatcher';
+import { Importer } from './importer';
 
 const watchEmitter = new EventEmitter();
 const dirWatcher = new DirWatcher(watchEmitter);
-dirWatcher.watch('data', 1000);
-watchEmitter.on(
-  changeEvent,
-  (dirPath: string, addedFiles: string[], removedFiles: string[]) =>
-    console.log(dirPath, addedFiles, removedFiles)
-);
+dirWatcher.watch('data', 500);
+const importer = new Importer(watchEmitter);
+importer.listen();
