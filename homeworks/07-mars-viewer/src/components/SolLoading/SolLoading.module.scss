@@ -1,0 +1,20 @@
+.button {
+  height: auto;
+  width: auto;
+  padding: 3px;
+
+  transition: 0.1s;
+
+  border-radius: 3px;
+  border: 1px solid #2d303a;
+  outline: none;
+
+  background-color: #e2ddcd;
+  cursor: pointer;
+
+  text-transform: capitalize;
+
+  &:hover {
+    box-shadow: 0 0 3px #181c22;
+  }
+}
