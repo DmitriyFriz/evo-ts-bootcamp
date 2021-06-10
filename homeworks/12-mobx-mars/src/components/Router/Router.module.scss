@@ -1,0 +1,24 @@
+.container {
+  margin-bottom: 10px;
+}
+
+.route_button {
+  font-size: 18px;
+  color: inherit;
+  background: inherit;
+  outline: none;
+  border: none;
+  text-transform: capitalize;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+    border-bottom: 2px dashed #2d303a;
+  }
+}
+
+.separator {
+  margin-left: 5px;
+  margin-right: 5px;
+}
