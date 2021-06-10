@@ -1,0 +1,80 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+
+  font-family: 'Sigmar One', cursive;
+  font-weight: 400;
+  color: #2d303a;
+  font-size: 16px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.score {
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+  margin-top: 10px;
+  font-size: 22px;
+}
+
+.board {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  margin-top: 10px;
+
+  background: url('../src/assets/img/cheese.svg') 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  cursor: url('../src/assets/img/hand.png'), grab;
+}
+
+.cell {
+  width: 70px;
+  height: 70px;
+  background-color: #f7be56;
+  position: absolute;
+  top: 70px;
+  left: 70px;
+  border: 4px solid #323c6b;
+  border-radius: 50%;
+}
+
+.aim {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  z-index: 10;
+
+  background-image: url('../src/assets/img/mouse.svg');
+  background-repeat: no-repeat;
+  background-size: 50px;
+  background-position: center;
+  border-radius: 50%;
+}
