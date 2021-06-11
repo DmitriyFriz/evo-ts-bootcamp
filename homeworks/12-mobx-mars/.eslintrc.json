@@ -65,7 +65,11 @@
     "react/jsx-wrap-multilines": "off",
     "react/destructuring-assignment": "off",
     "no-shadow": "off",
+    "lines-between-class-members": "off",
     "@typescript-eslint/no-shadow": ["error"],
-    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state", "draft", "draftState"] }]
+    "no-param-reassign": [
+      "error",
+      { "props": true, "ignorePropertyModificationsFor": ["state", "draft", "draftState"] }
+    ]
   }
 }

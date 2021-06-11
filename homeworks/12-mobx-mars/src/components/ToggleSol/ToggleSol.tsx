@@ -1,22 +1,20 @@
 import React from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { selectSelectedSol } from '../../store/mars/selectors';
-import { changeSol } from '../../store/mars/marsSlice';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../store/storeMobX';
 
 // style
 import s from './ToggleSol.module.scss';
 
-export const ToggleSol = () => {
-  const dispatch = useAppDispatch();
-  const selectedSol = useAppSelector(selectSelectedSol);
+export const ToggleSol = observer(() => {
+  const marsStore = useStore('marsStore');
 
   return (
     <input
       className={s.input}
-      value={selectedSol}
+      value={marsStore.selectedSol}
       type="number"
       min="1"
-      onChange={(e) => dispatch(changeSol(+e.target.value))}
+      onChange={(e) => marsStore.changeSol(+e.target.value)}
     />
   );
-};
+});
