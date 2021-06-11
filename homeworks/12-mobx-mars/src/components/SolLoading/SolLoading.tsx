@@ -1,37 +1,31 @@
 import React, { useEffect, useRef } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { selectSelectedSol, selectSelectedRover } from '../../store/mars/selectors';
-import { fetchSol } from '../../store/mars/marsSlice';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../store/storeMobX';
 
 // style
 import s from './SolLoading.module.scss';
 
-interface LoadingController {
-  abort(): void;
-}
-
-export const SolLoading = () => {
-  const dispatch = useAppDispatch();
-  const selectedSol = useAppSelector(selectSelectedSol);
-  const selectedRover = useAppSelector(selectSelectedRover);
-
-  const loadingController = useRef<LoadingController | null>(null);
+export const SolLoading = observer(() => {
+  const loadingController = useRef<AbortController | null>(null);
+  const marsStore = useStore('marsStore');
 
   useEffect(() => {
     if (loadingController.current) {
       loadingController.current.abort();
     }
-  }, [selectedSol, selectedRover]);
+  }, [marsStore.selectedSol, marsStore.selectedRover]);
 
   return (
     <button
       className={s.button}
       type="button"
       onClick={() => {
-        loadingController.current = dispatch(fetchSol());
+        const controller = new AbortController();
+        loadingController.current = controller;
+        marsStore.loadSol(controller.signal);
       }}
     >
       load
     </button>
   );
-};
+});
