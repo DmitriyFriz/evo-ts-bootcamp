@@ -1,35 +1,33 @@
 import React from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../store/storeMobX';
 import { RouteName } from '../../types';
-import { changeRoute } from '../../store/route/routeSlice';
-import { selectRoute } from '../../store/route/selectors';
 
 // style
 import s from './Router.module.scss';
 
-export const Router = () => {
-  const dispatch = useAppDispatch();
-  const route = useAppSelector(selectRoute);
+export const Router = observer(() => {
+  const routeStore = useStore('routeStore');
 
   return (
     <div className={s.container}>
       <button
         className={s.route_button}
-        onClick={() => dispatch(changeRoute(RouteName.Photos))}
+        onClick={() => routeStore.changeRoute(RouteName.Photos)}
         type="button"
-        disabled={route === RouteName.Photos}
+        disabled={routeStore.route === RouteName.Photos}
       >
         {RouteName.Photos}
       </button>
       <span className={s.separator}>|</span>
       <button
         className={s.route_button}
-        onClick={() => dispatch(changeRoute(RouteName.Favourites))}
+        onClick={() => routeStore.changeRoute(RouteName.Favourites)}
         type="button"
-        disabled={route === RouteName.Favourites}
+        disabled={routeStore.route === RouteName.Favourites}
       >
         {RouteName.Favourites}
       </button>
     </div>
   );
-};
+});

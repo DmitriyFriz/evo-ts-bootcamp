@@ -50,8 +50,6 @@ export class MarsStore {
       } else {
         currentRover[sol] = loadedPhotos;
       }
-
-      console.log(this.rovers, sol, rover);
     } catch (err) {
       if (err.name !== 'AbortError') {
         this.error = err || 'unknown error';
