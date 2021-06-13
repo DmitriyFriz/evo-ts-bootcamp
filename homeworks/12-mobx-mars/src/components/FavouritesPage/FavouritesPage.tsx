@@ -1,12 +1,12 @@
 import React from 'react';
-import { useAppSelector } from '../../hooks';
-import { selectFavouritesPhotos } from '../../store/favourites/selectors';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../store/storeMobX';
 import { Gallery } from '../Gallery';
 import { PhraseFavouritesPage } from '../../types';
-import {} from 'mobx-react-lite';
 
-export const FavouritesPage = () => {
-  const photos = useAppSelector(selectFavouritesPhotos);
+export const FavouritesPage = observer(() => {
+  const favouritesStore = useStore('favouritesStore');
+  const photos = favouritesStore.favouritesPhotos;
   return (
     <>
       <Gallery
@@ -16,4 +16,4 @@ export const FavouritesPage = () => {
       />
     </>
   );
-};
+});
