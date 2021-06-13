@@ -1,10 +1,6 @@
 import { makeAutoObservable, action, flow } from 'mobx';
-import { LoadingStatus, RoverName, Sols, Photo } from '../types';
+import { LoadingStatus, RoverName, Photo, Rovers } from '../types';
 import { getMarsRoverPhotos } from '../services/marsRover';
-
-type Rovers = {
-  [key in RoverName]?: Sols;
-};
 
 export class MarsStore {
   loading: LoadingStatus = LoadingStatus.Idle;

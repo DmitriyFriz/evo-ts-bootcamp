@@ -6,7 +6,7 @@ export interface Photo {
 }
 
 export interface Sols {
-  [key: number]: Photo[];
+  [key: string]: Photo[];
 }
 
 export enum LoadingStatus {
@@ -35,3 +35,7 @@ export enum PhraseFavouritesPage {
   undefined = 'Photos are not loaded',
   empty = 'No favourites photos',
 }
+
+export type Rovers = {
+  [key in RoverName]?: Sols;
+};
