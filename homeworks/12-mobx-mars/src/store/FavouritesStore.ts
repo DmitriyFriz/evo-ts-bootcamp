@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { Photo, RoverName, Rovers, Sols } from '../types';
+import { Photo, RoverName, Rovers } from '../types';
 
 interface EntityStore {
   rovers: Rovers;

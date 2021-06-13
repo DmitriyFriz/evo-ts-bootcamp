@@ -1,3 +1,3 @@
-# mars-viewer
+# mobx-mars
 
-## deploy: https://dmitriyfriz-mars-viewer.netlify.app/
+## deploy: https://dmitriyfriz-mobx-mars.netlify.app/
