@@ -1,0 +1,1 @@
+export { SolLoading } from './SolLoading';
